@@ -168,7 +168,7 @@ def main():
         choice_input = input("Enter your choice: ")
         
         if choice_input == '0':
-            print("\nExiting the program. Goodbye!")
+            print("\nExiting the program.!")
             break
         
         if choice_input in menu_options:
