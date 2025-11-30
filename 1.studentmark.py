@@ -8,7 +8,7 @@ def get_int_input(prompt):
             number_input = input(prompt)
             return int(number_input)
         except ValueError:
-            print("Dữ liệu nhập không hợp lệ. Vui lòng nhập một số nguyên.")
+            print("Invalid input. Please enter a whole number.")
 
 def get_mark_input(prompt):
     while True:
@@ -17,9 +17,9 @@ def get_mark_input(prompt):
             if 0 <= mark_value <= 20:
                 return mark_value
             else:
-                print("Điểm phải nằm trong khoảng từ 0 đến 20.")
+                print("Mark must be between 0 and 20.")
         except ValueError:
-            print("Dữ liệu nhập không hợp lệ. Vui lòng nhập một số.")
+            print("Invalid input. Please enter a number.")
 
 def find_item_by_id(item_list, item_identifier):
     for item in item_list:
