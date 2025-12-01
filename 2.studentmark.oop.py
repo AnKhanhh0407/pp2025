@@ -1,15 +1,15 @@
-# --- Base Classes ---
+
 
 class Student:
     """Represents a student with basic information."""
     
     def __init__(self, student_id, name, dob):
-        # Encapsulation: Attributes are set during initialization
+        
         self._student_id = student_id
         self._name = name
         self._dob = dob
 
-    # Properties for controlled access (Encapsulation)
+    
     @property
     def student_id(self):
         return self._student_id
@@ -22,7 +22,7 @@ class Student:
     def dob(self):
         return self._dob
 
-    # Polymorphic method: input is handled by the manager, but this defines the string representation
+    
     def __str__(self):
         return f"{self.student_id:<10} {self.name:<25} {self.dob:<10}"
 
@@ -30,11 +30,11 @@ class Course:
     """Represents a course."""
     
     def __init__(self, course_id, name):
-        # Encapsulation
+
         self._course_id = course_id
         self._name = name
 
-    # Properties for controlled access
+    
     @property
     def course_id(self):
         return self._course_id
@@ -43,22 +43,20 @@ class Course:
     def name(self):
         return self._name
 
-    # Polymorphic method
+    
     def __str__(self):
         return f"{self.course_id:<10} {self.name:<30}"
 
-# --- Manager Class ---
+
 
 class MarkManager:
     """Manages all students, courses, and marks, centralizing operations."""
     
     def __init__(self):
-        self._students = []  # List of Student objects
-        self._courses = []   # List of Course objects
-        # Marks stored as: {student_id: {course_id: mark_value, ...}}
-        self._marks = {}     
+        self._students = []  
+        self._courses = []   
+        
 
-    # --- Helper Methods ---
 
     def _get_int_input(self, prompt):
         """Safely handles integer input."""
@@ -94,7 +92,7 @@ class MarkManager:
                 return course
         return None
 
-    # --- Input Methods (Polymorphism: using .input() methods) ---
+    
 
     def input_students(self):
         """Input number of students and their details."""
@@ -111,11 +109,11 @@ class MarkManager:
             full_name = input("Enter student full name: ")
             date_of_birth = input("Enter student DoB (e.g., DD/MM/YYYY): ")
             
-            # Create a new Student object
+            
             new_student = Student(student_identifier, full_name, date_of_birth)
             self._students.append(new_student)
             
-            # Initialize mark entry
+            
             self._marks[student_identifier] = {}
             
         print(f"\nSuccessfully added {len(self._students)} student(s).")
@@ -134,7 +132,7 @@ class MarkManager:
                 
             course_name = input("Enter course name: ")
             
-            # Create a new Course object
+            
             new_course = Course(course_identifier, course_name)
             self._courses.append(new_course)
             
@@ -163,12 +161,12 @@ class MarkManager:
             prompt = f"Enter mark for {student.name} (ID: {student.student_id}) in {selected_course.name} [0-20]: "
             mark_value = self._get_mark_input(prompt)
             
-            # Use student_id and course_id properties to store mark
+             
             self._marks[student.student_id][selected_course.course_id] = mark_value
             
         print("\nMarks successfully recorded for the selected course.")
 
-    # --- Listing Methods (Polymorphism: using .list() methods) ---
+    
 
     def list_students(self):
         """List all students (id, name, DoB)."""
@@ -181,7 +179,7 @@ class MarkManager:
         print(f"{'ID':<10} {'Full Name':<25} {'DoB':<10}")
         print("-" * 45)
         
-        # Polymorphism in action: calling __str__ implicitly on each Student object
+         
         for student in self._students:
             print(student)
             
@@ -198,7 +196,7 @@ class MarkManager:
         print(f"{'ID':<10} {'Course Name':<30}")
         print("-" * 40)
         
-        # Polymorphism in action: calling __str__ implicitly on each Course object
+        
         for course in self._courses:
             print(course)
             
@@ -230,7 +228,7 @@ class MarkManager:
             student_id = student.student_id
             full_name = student.name
             
-            # Access mark using the encapsulated structure
+            
             mark_value = self._marks.get(student_id, {}).get(course_id, "N/A")
             
             if isinstance(mark_value, float):
@@ -241,12 +239,12 @@ class MarkManager:
             print(f"{student_id:<15} {full_name:<20} {mark_str:<10}")
         print("-" * 50)
 
-# --- Main Program Loop ---
+
 
 def main():
     """The main function to run the OOP student mark management system."""
     
-    manager = MarkManager() # Instantiate the manager class
+    manager = MarkManager() 
     
     menu_options = {
         '1': ("Input students", manager.input_students),
